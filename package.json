@@ -1,0 +1,22 @@
+{
+  "name": "angular-addresses",
+  "version": "1.0.0",
+  "description": "none",
+  "main": "index.html",
+  "scripts": {
+    "test": "none"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/edstros/Angular-Addresses"
+  },
+  "keywords": [
+    "none"
+  ],
+  "author": "Edwin Acevedo (edwin.a.acevedo@gmail.com)",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/edstros/Angular-Addresses/issues"
+  },
+  "homepage": "https://github.com/edstros/Angular-Addresses"
+}
