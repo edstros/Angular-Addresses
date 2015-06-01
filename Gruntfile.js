@@ -1,13 +1,13 @@
 module.exports = function(grunt) {
-// this goes through dependencies in package.json and loads them
+
   require('load-grunt-tasks')(grunt);
-// started from being copied and pasted from gruntjs.com/getting-started
- grunt.initConfig({
+
+  grunt.initConfig({
     pkg: grunt.file.readJSON('package.json'),
     autoprefixer: {
-      main:{
+      main: {
         options: ['>1% in US'],
-        src:' public/css/main.css'
+        src: 'public/css/main.css'
       }
     },
     babel: {
@@ -42,6 +42,16 @@ module.exports = function(grunt) {
       }
     },
     clean: ['public'],
+    connect: {
+      main: {
+        options: {
+          port: 8080,
+          base: 'public/',
+          open: true,
+          livereload: true
+        }
+      }
+    },
     copy: {
       main: {
         files: [
@@ -58,16 +68,6 @@ module.exports = function(grunt) {
             filter: 'isFile'
           }
         ]
-      }
-    },
-//adding the connect
-    connect: {
-      server: {
-        options: {
-          port: 9000,
-          base: 'public/',
-          open: true
-        }
       }
     },
     cssmin: {
@@ -140,32 +140,34 @@ module.exports = function(grunt) {
         ]
       }
     },
-    //adding watch
     watch: {
       livereload: {
         options: {
-          livereload: true,
+          livereload: true
         },
+
         files: [
-          'public/**/*.js',
-          'public/**/*.html',
-          'public/**/*.css',
+          'public/css/main.css',
+          'public/js/**/*.js',
+          'public/**/*.html'
         ]
       },
-        jade: {
-          files: ['src/**/*.jade'],
-          tasks: ['jade:dev']
-        },
-        sass: {
-          files: ['src/**/*.scss'],
-          tasks: ['sass:dev']
-        },
-        js: {
-          files: ['src/js/**/*.js'],
-          tasks: ['babel:dev']
-        }
+      jade: {
+        files: ['src/**/*.jade'],
+        tasks: ['jade:dev']
+      },
+      sass: {
+        files: ['src/**/*.scss'],
+        tasks: ['sass:dev', 'autoprefixer']
+      },
+      js: {
+        files: ['src/js/**/*.js'],
+        tasks: ['babel:dev']
+      }
+
     }
   });
+
   grunt.registerTask('default', []);
   grunt.registerTask('build', [
     'clean',
@@ -187,9 +189,11 @@ module.exports = function(grunt) {
     'sass:dev',
     'autoprefixer'
   ]);
-  grunt.registerTask('server', [
+
+  grunt.registerTask('serve', [
     'build-dev',
     'connect',
     'watch'
   ]);
+
 };
