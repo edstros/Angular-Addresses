@@ -3,8 +3,25 @@ img {
   max-height: 75px;
   border: 1px solid #999;
 }
-td,th {
+th, td {
   padding: 5px;
   border-bottom: 1px solid #999;
   text-align: center;
+}
+
+.topmargin {
+    margin-top: 10px;
+}
+h1 {
+  font-family: 'Oswald', sans-serif;
+  font-weight: 700
+}
+h2 {
+  font-family: 'Oswald', sans-serif;
+  font-weight: 400;
+}
+.closeBtn {
+  font-family: 'Oswald', sans-serif;
+  font-weight: 200;
+  font-size: .8em;
 }

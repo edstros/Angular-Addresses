@@ -1,7 +1,7 @@
 var app = angular.module('angularAddresses', []);
 
 app.controller('Main', function () {
-  var vm = this; //so that the
+  var vm = this; //so that the app can grow and this can be used within local scope
   vm.people = [
     {
       name: 'John',
