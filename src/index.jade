@@ -1,5 +1,5 @@
 doctype html
-html(lang="en-US")
+html(lang="en-US" ng-app="angularAddresses")
   head
     meta(charset="utf-8")
     meta(http-equiv="X-UA-Compatible", content="IE=edge")
@@ -7,7 +7,32 @@ html(lang="en-US")
     title Angular Addresses
     link(rel="stylesheet", href="lib/build.css")
     link(rel="stylesheet", href="css/main.css")
-  body
+  body(ng-controller="Main as main")
     .container
-      script(src="lib/build.js")
-      script(src="js/main.js")
+      form(name="newContactForm", ng-submit="newContactForm.$valid && main.addNewContact()", novalidate)
+        label Name
+        input(type="text", placeholder="Name", ng-model="main.newPerson.name",  required)
+        label Phone
+        input(type="tel", placeholder="555-555-5555", ng-model="main.newPerson.phone", required)
+        label Twitter
+        input(type="text", placeholder="@yourtwitter", ng-model="main.newPerson.twitter", required)
+        input(type="submit", value="Add Person to Address Book", ng-disabled="newContactForm.$invalid")
+      table
+        thead
+          tr
+            th Delete
+            th Name
+            th Phone Number
+            th Twitter
+        tbody
+          tr(ng-repeat="person in main.people | orderBy:'name' | filter:query")
+            td
+              button(ng-click="main.removeContact(person)") X
+            td
+              {{person.name | lowercase}}
+            td
+              {{person.phone}}
+            td: a(href="http://twitter.com/{{person.twitter}}", target="_blank") {{person.twitter}}
+      input(placeholder="Search", ng-model="query")
+    script(src="lib/build.js")
+    script(src="js/main.js")

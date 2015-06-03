@@ -193,7 +193,7 @@ module.exports = function(grunt) {
     'autoprefixer'
   ]);
 
-  grunt.registerTask('serve', [
+  grunt.registerTask('server', [
     'build-dev',
     'connect',
     'watch'
