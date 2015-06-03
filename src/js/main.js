@@ -6,27 +6,37 @@ app.controller('Main', function () {
     {
       name: 'John',
       phone: '(111) 111-1111',
-      twitter: '@john'
+      twitter: '@john',
+      photo: 'http://i.imgur.com/P7pkOEF.jpg'
+
     },
     {
       name: 'Jennifer',
       phone: '(222) 222-2222',
-      twitter: '@jenster'
+      twitter: '@jenster',
+      photo: 'http://i.imgur.com/P7pkOEF.jpg'
+
     },
     {
       name: 'James',
       phone: '(333) 333-3333',
-      twitter: '@jimbo'
+      twitter: '@jimbo',
+      photo: 'http://i.imgur.com/P7pkOEF.jpg'
+
     },
     {
       name: 'Chelsea',
       phone: '(444) 444-4444',
-      twitter: '@chels'
+      twitter: '@chels',
+      photo: 'http://i.imgur.com/P7pkOEF.jpg'
+
     },
     {
       name: 'Edwin',
       phone: '(555) 555-5555',
-      twitter: '@edstros'
+      twitter: '@edstros',
+      photo: 'http://i.imgur.com/P7pkOEF.jpg'
+
     },
   ];
   vm.newPerson = {};

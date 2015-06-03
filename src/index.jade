@@ -4,23 +4,20 @@ html(lang="en-US" ng-app="angularAddresses")
     meta(charset="utf-8")
     meta(http-equiv="X-UA-Compatible", content="IE=edge")
     meta(name="viewport", content="width=device-width, initial-scale=1")
-    title Angular Addresses
+    title Angular Contacts
     link(rel="stylesheet", href="lib/build.css")
     link(rel="stylesheet", href="css/main.css")
   body(ng-controller="Main as main")
     .container
-      form(name="newContactForm", ng-submit="newContactForm.$valid && main.addNewContact()", novalidate)
-        label Name
-        input(type="text", placeholder="Name", ng-model="main.newPerson.name",  required)
-        label Phone
-        input(type="tel", placeholder="555-555-5555", ng-model="main.newPerson.phone", required)
-        label Twitter
-        input(type="text", placeholder="@yourtwitter", ng-model="main.newPerson.twitter", required)
-        input(type="submit", value="Add Person to Address Book", ng-disabled="newContactForm.$invalid")
+      h1 Angular Contacts
+      h2 Search
+      input.form-control(placeholder="Search", ng-model="query")
+      h2 Contacts
       table
         thead
           tr
             th Delete
+            th Photo
             th Name
             th Phone Number
             th Twitter
@@ -29,10 +26,24 @@ html(lang="en-US" ng-app="angularAddresses")
             td
               button(ng-click="main.removeContact(person)") X
             td
+              img(ng-src="{{person.photo}}")
+            td
               {{person.name | lowercase}}
             td
               {{person.phone}}
             td: a(href="http://twitter.com/{{person.twitter}}", target="_blank") {{person.twitter}}
-      input(placeholder="Search", ng-model="query")
+      h2 Add New Contact
+      form(name="newContactForm", ng-submit="newContactForm.$valid && main.addNewContact()", novalidate)
+        .form-group(ng-class="{'has-success': newContactForm.n.$dirty && main.newPerson.name}")
+          label.control-label Name
+          input.form-control(name="n", type="text", placeholder="Name", ng-model="main.newPerson.name",  required)
+        .form-group(ng-class="{'has-success': newContactForm.p.$dirty && main.newPerson.name, 'has-error': newContactForm.p.$dirty && !main.newPerson.phone}")
+          label.control-label Phone
+          input.form-control(name="p", type="tel", placeholder="555-555-5555", ng-model="main.newPerson.phone", required)
+        .form-group(ng-class="{'has-success': newContactForm.t.$dirty && (main.newPerson.twitter.length < 2 || main.newPerson.twitter[0] !=='@')}")
+          label.control-label Twitter
+          input.form-control(name="t", type="text", placeholder="@yourtwitter", ng-model="main.newPerson.twitter", required)
+        input.btn.btn-primary(type="submit", value="Add Person to Contacts", ng-disabled="newContactForm.$invalid")
+        div &nbsp;
     script(src="lib/build.js")
     script(src="js/main.js")
