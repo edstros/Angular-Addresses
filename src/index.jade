@@ -5,7 +5,8 @@ html(lang="en-US" ng-app="angularAddresses")
     meta(http-equiv="X-UA-Compatible", content="IE=edge")
     meta(name="viewport", content="width=device-width, initial-scale=1")
     title Angular Contacts
-    link(href='http://fonts.googleapis.com/css?family=Oswald:400,700,300' rel='stylesheet' type='text/css')
+    link(href='http://fonts.googleapis.com/css?family=Oswald:400,700,300' rel='stylesheet')
+    link(href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css" rel="stylesheet")
     link(rel="stylesheet", href="lib/build.css")
     link(rel="stylesheet", href="css/main.css")
   body(ng-controller="Main as main")
@@ -25,7 +26,7 @@ html(lang="en-US" ng-app="angularAddresses")
         tbody
           tr(ng-repeat="person in main.people | orderBy:'name' | filter:query")
             td
-              button.btn-danger(ng-click="main.removeContact(person)") X
+              button.btn.btn-danger.btn-xs.glyphicon.glyphicon-remove-circle.white.xtext(ng-click="main.removeContact(person)")
             td
               img(ng-src="{{person.photo}}")
             td
@@ -38,7 +39,7 @@ html(lang="en-US" ng-app="angularAddresses")
         .modal-dialog
           .modal-content
             .modal-header
-              //btn.btn-danger.close(data-dismiss="modal") close
+              .button.btn.btn-danger.pull-right(data-dismiss="modal") cancel
                 //span CLOSE
               h2 New Contact Information
             .modal-body
