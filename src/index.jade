@@ -7,6 +7,7 @@ html(lang="en-US" ng-app="angularAddresses")
     title Angular Contacts
     link(href='http://fonts.googleapis.com/css?family=Oswald:400,700,300' rel='stylesheet')
     link(href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css" rel="stylesheet")
+
     link(rel="stylesheet", href="lib/build.css")
     link(rel="stylesheet", href="css/main.css")
   body(ng-controller="Main as main")
@@ -24,23 +25,22 @@ html(lang="en-US" ng-app="angularAddresses")
             th Phone Number
             th Twitter
         tbody
-          tr(ng-repeat="person in main.people | orderBy:'name' | filter:query")
+          tr(ng-repeat="(id, person) in main.people | objToArr | orderBy:'name' | filter:query")
             td
               button.btn.btn-danger.btn-xs.glyphicon.glyphicon-remove-circle.white.xtext(ng-click="main.removeContact(person)")
             td
               img(ng-src="{{person.photo}}")
             td
-              {{person.name | lowercase}}
+              {{person.name | ransomcase}}
             td
               {{person.phone}}
             td: a(href="http://twitter.com/{{person.twitter}}", target="_blank") {{person.twitter}}
-      .btn.btn-primary.topmargin(data-toggle="modal", data-target="#modal") Add New Contact
+      .btn.btn-primary.btnMargin(data-toggle="modal", data-target="#modal") Add New Contact
       .modal.fade#modal
         .modal-dialog
           .modal-content
             .modal-header
               .button.btn.btn-danger.pull-right(data-dismiss="modal") cancel
-                //span CLOSE
               h2 New Contact Information
             .modal-body
               form(name="newContactForm", ng-submit="newContactForm.$valid && main.addNewContact()", novalidate)
@@ -53,6 +53,9 @@ html(lang="en-US" ng-app="angularAddresses")
                 .form-group(ng-class="{'has-success': newContactForm.t.$dirty && (main.newPerson.twitter.length < 2 || main.newPerson.twitter[0] !=='@')}")
                   label.control-label Twitter
                   input.form-control(name="t", type="text", placeholder="@yourtwitter", ng-model="main.newPerson.twitter", required)
+                .form-group(ng-class="{'has-success': newContactForm.pic.$dirty && (main.newPerson.photo || main.newPerson.photo)}")
+                  label.control-label Photo
+                  input.form-control(name="pic", type="text", placeholder="Photo url", ng-model="main.newPerson.photo", required)
                 button.btn.btn-primary(ng-click="newContactForm.$valid && main.addNewContact()", ng-disabled="newContactForm.$invalid") Add Person to Contacts
                 button.btn.btn-default(data-dismiss="modal") Done
                 div &nbsp;
