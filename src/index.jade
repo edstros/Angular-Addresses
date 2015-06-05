@@ -56,7 +56,7 @@ html(lang="en-US" ng-app="angularAddresses")
                 .form-group(ng-class="{'has-success': newContactForm.pic.$dirty && (main.newPerson.photo || main.newPerson.photo)}")
                   label.control-label Photo
                   input.form-control(name="pic", type="text", placeholder="Photo url", ng-model="main.newPerson.photo", required)
-                button.btn.btn-primary(ng-click="newContactForm.$valid && main.addNewContact()", ng-disabled="newContactForm.$invalid") Add Person to Contacts
+                button.btn.btn-primary(ng-click="newContactForm.$valid", ng-disabled="newContactForm.$invalid") Add Person to Contacts
                 button.btn.btn-default(data-dismiss="modal") Done
                 div &nbsp;
     script(src="lib/build.js")

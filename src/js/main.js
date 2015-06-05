@@ -8,9 +8,9 @@ var app = angular
           .map(function (key) {
             obj[key]._id = key;
             return obj[key];
-        console.log(key); //does not see this
-        console.log(obj); //also does not see this
-        });
+            console.log(key); //does not see this, says key is not defined, although it is defined n line 9.
+            console.log(obj); //also does not see this
+          });
       }
     };
   })
@@ -30,7 +30,7 @@ app.controller('Main', function ($http) {
     .get('https://addressangularity.firebaseio.com/people.json')
     .success(function (data) {
       vm.people = data;
-    console.log(data); //sees the whole firebase
+      //console.log(data); //sees the whole firebase
     });
   vm.newPerson = {};
   vm.addNewContact = function () { //reference on the button in the html
@@ -44,12 +44,12 @@ app.controller('Main', function ($http) {
   };
   vm.removeContact = function (id) {
     $http
-      .delete('https://addressangularity.firebaseio.com/' + id + '.json')
+      .delete('https://addressangularity.firebaseio.com/people/' + id._id + '.json')
       .success(function () {
-        delete vm.people[id];
-        console.log(id);//never sees this
+      delete vm.people[id._id];
+        console.log(id); //never sees this
         //var index = vm.people.indexOf(person);
-          //vm.people.splice(index, 1);
+        //vm.people.splice(index, 1);
       });
   };
 });
