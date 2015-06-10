@@ -10,54 +10,15 @@ html(lang="en-US" ng-app="angularAddresses")
 
     link(rel="stylesheet", href="lib/build.css")
     link(rel="stylesheet", href="css/main.css")
-  body(ng-controller="Main as main")
+  body
     .container
-      h1 ANGULAR CONTACTS
-      h2 Search
-      input.form-control(placeholder="Search", ng-model="query")
-      h2 Contacts
-      table
-        thead
-          tr
-            th Delete
-            th Photo
-            th Name
-            th Phone Number
-            th Twitter
-        tbody
-          tr(ng-repeat="(id, person) in main.people | objToArr | orderBy:'name' | filter:query")
-            td
-              button.btn.btn-danger.btn-xs.glyphicon.glyphicon-remove-circle.white.xtext(ng-click="main.removeContact(person)")
-            td
-              img(ng-src="{{person.photo}}")
-            td
-              {{person.name | ransomcase}}
-            td
-              {{person.phone}}
-            td: a(href="http://twitter.com/{{person.twitter}}", target="_blank") {{person.twitter}}
-      .btn.btn-primary.btnMargin(data-toggle="modal", data-target="#modal") Add New Contact
-      .modal.fade#modal
-        .modal-dialog
-          .modal-content
-            .modal-header
-              .button.btn.btn-danger.pull-right(data-dismiss="modal") cancel
-              h2 New Contact Information
-            .modal-body
-              form(name="newContactForm", ng-submit="newContactForm.$valid && main.addNewContact()", novalidate)
-                .form-group(ng-class="{'has-success': newContactForm.n.$dirty && main.newPerson.name}")
-                  label.control-label Name
-                  input.form-control(name="n", type="text", placeholder="Name", ng-model="main.newPerson.name",  required)
-                .form-group(ng-class="{'has-success': newContactForm.p.$dirty && main.newPerson.name, 'has-error': newContactForm.p.$dirty && !main.newPerson.phone}")
-                  label.control-label Phone
-                  input.form-control(name="p", type="tel", placeholder="555-555-5555", ng-model="main.newPerson.phone", required)
-                .form-group(ng-class="{'has-success': newContactForm.t.$dirty && (main.newPerson.twitter.length < 2 || main.newPerson.twitter[0] !=='@')}")
-                  label.control-label Twitter
-                  input.form-control(name="t", type="text", placeholder="@yourtwitter", ng-model="main.newPerson.twitter", required)
-                .form-group(ng-class="{'has-success': newContactForm.pic.$dirty && (main.newPerson.photo || main.newPerson.photo)}")
-                  label.control-label Photo
-                  input.form-control(name="pic", type="text", placeholder="Photo url", ng-model="main.newPerson.photo", required)
-                button.btn.btn-primary(ng-click="newContactForm.$valid", ng-disabled="newContactForm.$invalid") Add Person to Contacts
-                button.btn.btn-default(data-dismiss="modal") Done
-                div &nbsp;
+      nav.navbar.navbar-collapse
+        ul.nav.navbar-nav
+          li: a(href='/#/') Home
+          li: a(href='/#/about') About
+          li: a(href='/#/mycontacts') My Contacts
+          li(ng-hide="auth"): a(href="/#/login") Login
+          li(ng-show="auth"): a(href="/#/logout") Logout
+      .app(ng-view)
     script(src="lib/build.js")
     script(src="js/main.js")

@@ -1,0 +1,20 @@
+table.table-striped.table-hover
+  thead
+    tr
+      th Delete
+      th Photo
+      th Name
+      th Phone Number
+      th Twitter
+  tbody
+    tr(ng-repeat="(id, person) in main.people | objToArr | orderBy:'name' | filter:query")
+      td
+        button.btn.btn-danger.btn-xs.glyphicon.glyphicon-remove-circle.white.xtext(ng-click="main.removeContact(person)")
+      td
+        img(ng-src="{{person.photo}}")
+      td
+        {{person.name | ransomcase}}
+      td
+        {{person.phone}}
+      td: a(href="http://twitter.com/{{person.twitter}}", target="_blank") {{person.twitter}}
+.btn.btn-primary.btnMargin(data-toggle="modal", data-target="#modal") Add New Contact
